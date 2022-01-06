@@ -21,6 +21,9 @@ This template is made in Gatsby, i18n for the locales, Formik for the logic in f
 ## Environment variables
 To expose a variable in the browser, you must preface its name with `GATSBY_`. So `GATSBY_API_URL` will be available in browser code but `API_KEY` will not.
 
+> ### Note:
+> Never put variables in `.env.example`
+
 ## Folder architecture
 
 > - src/
