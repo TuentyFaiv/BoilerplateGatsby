@@ -18,6 +18,9 @@ This template is made in Gatsby, i18n for the locales, Formik for the logic in f
 - `npm run build` to make the build of vendor and project
 - `npm run serve` to view the build in local
 
+## Environment variables
+To expose a variable in the browser, you must preface its name with `GATSBY_`. So `GATSBY_API_URL` will be available in browser code but `API_KEY` will not.
+
 ## Folder architecture
 
 > - src/
