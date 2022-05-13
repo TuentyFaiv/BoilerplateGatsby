@@ -5,7 +5,7 @@ import { ContactSchema, DEFAULT_CONTACT_VALUES } from "@schemas";
 import { sendContactEmail } from "@services";
 import { useGetCountry } from "@hooks";
 
-import Input, { TextArea } from "@components/Input";
+import { Input, TextArea } from "@components";
 
 export default function ContactForm() {
   const { t } = useTranslation("formik");

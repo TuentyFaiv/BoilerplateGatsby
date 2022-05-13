@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-index-jsx",
-    "path": "/en/",
-    "result": {"data":{"locales":{"edges":[{"node":{"ns":"footer","data":"{}","language":"en"}},{"node":{"ns":"formik","data":"{}","language":"en"}},{"node":{"ns":"header","data":"{}","language":"en"}},{"node":{"ns":"contact","data":"{}","language":"en"}},{"node":{"ns":"heros","data":"{}","language":"en"}},{"node":{"ns":"home","data":"{\"title-home\":\"This is the title of the home with react-i18next\"}","language":"en"}},{"node":{"ns":"terms","data":"{}","language":"en"}},{"node":{"ns":"transaltion","data":"{}","language":"en"}}]}},"pageContext":{"language":"en","i18n":{"language":"en","languages":["en","es"],"defaultLanguage":"es","generateDefaultLanguagePage":false,"routed":true,"originalPath":"/","path":"en/"}}},
-    "staticQueryHashes": ["240985131"]}

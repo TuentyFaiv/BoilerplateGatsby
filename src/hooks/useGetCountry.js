@@ -2,31 +2,31 @@ import { useEffect, useState } from "react";
 import config from "@config";
 
 export default function useGetCountry() {
-  const [countryState, setCountry] = useState({
+  const [country, setCountry] = useState({
     phoneCode: "",
     name: "",
     code: "",
     emoji: ""
   });
+  const [error, setError] = useState("");
 
   useEffect(() => {
     (async () => {
       try {
         const request = await fetch(`${config.ipregistry_url}?key=${config.ipregistry_key}`);
-        const { location: { country } } = await request.json();
+        const { location: { country: countryApi } } = await request.json();
         setCountry((prevCountry) => ({
           ...prevCountry,
-          phoneCode: `+${country.calling_code}`,
-          name: country.name,
-          code: country.code,
-          emoji: country.flag.emoji
+          phoneCode: `+${countryApi.calling_code}`,
+          name: countryApi.name,
+          code: countryApi.code,
+          emoji: countryApi.flag.emoji
         }));
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
+      } catch (err) {
+        setError(err.message);
       }
     })();
   }, []);
 
-  return countryState;
+  return { country: country, error };
 }
