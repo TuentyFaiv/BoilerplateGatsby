@@ -1,7 +1,7 @@
 import { graphql } from "gatsby";
 import { useTranslation } from "gatsby-plugin-react-i18next";
 
-import SEO from "@components/SEO";
+import { SEO } from "@components";
 
 const IndexPage = () => {
   const { t } = useTranslation("home");
