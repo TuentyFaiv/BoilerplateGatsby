@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import { graphql, useStaticQuery } from "gatsby";
 
-export default function SEO({ description, lang, meta = [], title }) {
+export default function SEO({ description, lang, meta = [], title }: any) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -24,7 +24,7 @@ export default function SEO({ description, lang, meta = [], title }) {
         lang
       }}
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
       meta={[
         {
           name: "description",

@@ -1,4 +1,4 @@
-import { graphql, Link } from "gatsby";
+import { Link } from "gatsby";
 
 // styles
 const pageStyles = {
@@ -55,17 +55,3 @@ const NotFoundPage = () => (
 );
 
 export default NotFoundPage;
-
-export const query = graphql`
-  query ($language: String!) {
-    locales: allLocale(filter: {language: {eq: $language}}) {
-      edges {
-        node {
-          ns
-          data
-          language
-        }
-      }
-    }
-  }
-`;

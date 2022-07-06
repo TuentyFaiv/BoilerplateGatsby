@@ -12,3 +12,5 @@ export const sendContactEmail = async ({ values }) => {
 
   return response;
 };
+
+export const other = {};
