@@ -1,10 +1,13 @@
-require("dotenv").config({
+import type { GatsbyConfig } from "gatsby";
+import { config as loadEnv } from "dotenv";
+
+loadEnv({
   path: `.env.${process.env.NODE_ENV}`
 });
 
-module.exports = {
+const config: GatsbyConfig = {
   siteMetadata: {
-    siteUrl: "https://localhost.com/",
+    siteUrl: "https://localhost:8000/",
     title: "TemplateGatsby",
     author: "TemplateGatsby",
     image: ""
@@ -58,7 +61,7 @@ module.exports = {
       options: {
         localeJsonSourceName: "locale",
         languages: ["en", "es"],
-        siteUrl: "https://localhost.com/", // Correct URL
+        siteUrl: "https://localhost:8000/", // Correct URL
         defaultLanguage: "es",
         redirect: false,
         i18nextOptions: {
@@ -68,17 +71,19 @@ module.exports = {
           keySeparator: false,
           nsSeparator: false,
           ns: [
-            "translation",
-            "header",
+            "contact",
             "footer",
+            "formik",
+            "header",
             "heros",
             "home",
-            "contact",
             "terms",
-            "formik"
+            "translation"
           ]
         }
       }
     }
   ]
 };
+
+export default config;
