@@ -1,5 +1,7 @@
-import type { GatsbyConfig } from "gatsby";
 import { config as loadEnv } from "dotenv";
+import projectConfig from "@config";
+
+import type { GatsbyConfig } from "gatsby";
 
 loadEnv({
   path: `.env.${process.env.NODE_ENV}`
@@ -7,9 +9,9 @@ loadEnv({
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    siteUrl: "https://localhost:8000/",
-    title: "TemplateGatsby",
-    author: "TemplateGatsby",
+    siteUrl: projectConfig.api_local,
+    title: projectConfig.brand,
+    author: projectConfig.author,
     image: ""
   },
   plugins: [
@@ -21,7 +23,6 @@ const config: GatsbyConfig = {
     //   },
     // },
     "gatsby-plugin-image",
-    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
@@ -29,7 +30,6 @@ const config: GatsbyConfig = {
         icon: "src/assets/images/icons/icon.png"
       }
     },
-    "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
@@ -39,6 +39,14 @@ const config: GatsbyConfig = {
         path: "./src/assets/images/"
       },
       __key: "images"
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: "./src/assets/videos/"
+      },
+      __key: "videos"
     },
     {
       resolve: "gatsby-source-filesystem",
@@ -60,9 +68,9 @@ const config: GatsbyConfig = {
       resolve: "gatsby-plugin-react-i18next",
       options: {
         localeJsonSourceName: "locale",
-        languages: ["en", "es"],
-        siteUrl: "https://localhost:8000/", // Correct URL
-        defaultLanguage: "es",
+        languages: projectConfig.i18n_langs,
+        defaultLanguage: projectConfig.i18n_fallback_lang,
+        siteUrl: projectConfig.api_local,
         redirect: false,
         i18nextOptions: {
           interpolation: {
@@ -71,6 +79,7 @@ const config: GatsbyConfig = {
           keySeparator: false,
           nsSeparator: false,
           ns: [
+            "about",
             "contact",
             "footer",
             "formik",

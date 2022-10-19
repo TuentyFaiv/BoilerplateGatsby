@@ -23,7 +23,10 @@ export default function useGetCountry() {
           emoji: countryApi.flag.emoji
         }));
       } catch (err) {
-        setError(err.message);
+        let message = "Oops";
+        if (err instanceof Error) message = err.message;
+
+        setError(message);
       }
     })();
   }, []);

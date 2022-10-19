@@ -1,6 +1,7 @@
-// import path from "path";
-import type { CreateBabelConfigArgs, CreateWebpackConfigArgs } from "gatsby";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+// import MiniCssExtractPlugin from "mini-css-extract-plugin";
+
+import type { CreateBabelConfigArgs, CreateWebpackConfigArgs } from "gatsby";
 
 export function onCreateBabelConfig({ actions }: CreateBabelConfigArgs) {
   actions.setBabelPlugin({
@@ -14,9 +15,20 @@ export function onCreateBabelConfig({ actions }: CreateBabelConfigArgs) {
 export function onCreateWebpackConfig({ actions }: CreateWebpackConfigArgs) {
   actions.setWebpackConfig({
     resolve: {
-      plugins: [new TsconfigPathsPlugin({
-        extensions: [".js", ".jsx", ".ts", ".tsx"]
-      })]
+      plugins: [
+        new TsconfigPathsPlugin({
+          extensions: [".js", ".jsx", ".ts", ".tsx"]
+        })
+        // new MiniCssExtractPlugin()
+      ]
     }
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /\.s?css$/,
+    //       use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+    //     }
+    //   ]
+    // }
   });
 }

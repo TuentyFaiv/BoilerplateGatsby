@@ -1,7 +1,11 @@
+import { ServiceProvider } from "@context";
+
+import type { LayoutProps } from "@typing/proptypes";
+
 import "@styles";
 import "@stylesComponents/Layout.scss";
 
-function Layout({ children }) {
+function Layout({ children }: LayoutProps) {
 
   /* Effect to add a script */
   // useEffect(() => {
@@ -14,9 +18,11 @@ function Layout({ children }) {
   // }, []);
 
   return (
-    <main className="layout">
-      {children}
-    </main>
+    <ServiceProvider>
+      <main className="layout">
+        {children}
+      </main>
+    </ServiceProvider>
   );
 }
 

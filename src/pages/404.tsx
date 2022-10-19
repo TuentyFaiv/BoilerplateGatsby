@@ -1,5 +1,10 @@
 import { Link } from "gatsby";
 
+import type { HeadFC } from "gatsby";
+import type { QueryReturnHead } from "@typing/types";
+
+import { SEO } from "@components";
+
 // styles
 const pageStyles = {
   color: "#232129",
@@ -53,5 +58,17 @@ const NotFoundPage = () => (
     </p>
   </main>
 );
+
+export const Head: HeadFC<QueryReturnHead> = ({ data: { locales } }) => {
+  const home = locales.edges.find(({ node }) => (node.ns === "home"));
+
+  const { "title-seo": titleSeo } = home ? JSON.parse(home.node.data) : {
+    "title-seo": ""
+  };
+
+  return (
+    <SEO title={titleSeo} />
+  );
+};
 
 export default NotFoundPage;

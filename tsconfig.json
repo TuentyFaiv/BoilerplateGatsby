@@ -42,31 +42,37 @@
         "src/assets/fonts/*"
       ],
       "@utils": [
-        "src/common/utils.js"
+        "src/common/utils.ts"
       ],
       "@config": [
-        "src/common/config.js"
+        "src/common/config.ts"
+      ],
+      "@endpoints": [
+        "src/common/endpoints.ts"
       ],
       "@schemas": [
-        "src/common/schemas/index.js"
+        "src/common/schemas/index.ts"
       ],
       "@services": [
-        "src/common/services/index.js"
+        "src/common/services/index.ts"
+      ],
+      "@typing/*": [
+        "src/common/typing/*"
       ],
       "@components": [
-        "src/components/index.js"
+        "src/components/index.ts"
       ],
       "@containers": [
-        "src/containers/index.js"
+        "src/containers/index.ts"
       ],
       "@context": [
-        "src/context/index.js"
+        "src/context/index.ts"
       ],
       "@hooks": [
-        "src/hooks/index.js"
+        "src/hooks/index.ts"
       ],
       "@hoc": [
-        "src/hoc/index.js"
+        "src/hoc/index.ts"
       ],
       "@pages/*": [
         "src/pages/*"

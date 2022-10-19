@@ -2,45 +2,40 @@ import { Formik, Form } from "formik";
 import { useTranslation } from "gatsby-plugin-react-i18next";
 import swal from "sweetalert";
 import { ContactSchema, DEFAULT_CONTACT_VALUES } from "@schemas";
-import { sendContactEmail } from "@services";
+import { submitForm, useContactService } from "@services";
 import { useGetCountry } from "@hooks";
+
+import type { ContactValues } from "@typing/services";
+import type { BootContact } from "@typing/interfaces";
 
 import { Input, TextArea } from "@components";
 
 export default function ContactForm() {
   const { t } = useTranslation("formik");
-  const { phoneCode } = useGetCountry();
+  const { sendEmail } = useContactService();
+  const { country: { phoneCode } } = useGetCountry();
 
-  const formTranslations = {
+  const boot: BootContact = {
     required: t("required"),
+    email: t("required-email"),
     requiredTerms: t("required-terms")
   };
 
-  const handleSubmit = async (values, actions) => {
-    try {
-      actions.setSubmitting(true);
+  const handleSubmit = submitForm<ContactValues>(async (values) => {
+    await sendEmail({ ...values, phoneCode });
 
-      const { error } = await sendContactEmail({ values: { ...values, phoneCode } });
-      if (error) throw new Error(error);
-
-      actions.resetForm(DEFAULT_CONTACT_VALUES);
-      swal({
-        title: "Success!",
-        text: t("contact-form-success", { ns: "swal" }),
-        icon: "success"
-      });
-    } catch (error) {
-      swal("Error!", t(error.message, { ns: "errors" }), "error");
-    } finally {
-      actions.setSubmitting(false);
-    }
-  };
+    swal({
+      title: "Success!",
+      text: t("contact-form-success", { ns: "swal" }),
+      icon: "success"
+    });
+  }, t, DEFAULT_CONTACT_VALUES);
 
   return (
     <section className="contact">
       <Formik
         initialValues={DEFAULT_CONTACT_VALUES}
-        validationSchema={ContactSchema(formTranslations)}
+        validationSchema={ContactSchema(boot)}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
@@ -80,7 +75,6 @@ export default function ContactForm() {
                 <TextArea
                   label={t("details")}
                   name="message"
-                  type="text"
                   placeholder={t("details")}
                 />
               </div>

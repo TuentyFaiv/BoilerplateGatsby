@@ -1,7 +1,8 @@
-import { Helmet } from "react-helmet";
 import { graphql, useStaticQuery } from "gatsby";
 
-export default function SEO({ description, lang, meta = [], title }: any) {
+import type { SEOProps } from "@typing/proptypes";
+
+export default function SEO({ title, description, meta = [] }: SEOProps) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -19,46 +20,21 @@ export default function SEO({ description, lang, meta = [], title }: any) {
   const defaultTitle = site.meta?.title;
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang
-      }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
-      meta={[
-        {
-          name: "description",
-          content: metaDescription
-        },
-        {
-          property: "og:title",
-          content: title
-        },
-        {
-          property: "og:description",
-          content: metaDescription
-        },
-        {
-          property: "og:type",
-          content: "website"
-        },
-        {
-          name: "twitter:card",
-          content: "summary"
-        },
-        {
-          name: "twitter:creator",
-          content: site.meta?.author || ""
-        },
-        {
-          name: "twitter:title",
-          content: title
-        },
-        {
-          name: "twitter:description",
-          content: metaDescription
-        }
-      ].concat(meta)}
-    />
+    <>
+      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
+      <meta name="description" content={metaDescription} />
+      {/* Open Graph */ }
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:type" content="website" />
+      {/* Twitter */ }
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content={site.meta?.author || ""} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={metaDescription} />
+      {meta.map((metaProps, index) => (
+        <meta key={`${index + 1}`} {...metaProps} />
+      ))}
+    </>
   );
 }
